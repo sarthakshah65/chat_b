@@ -1,0 +1,45 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Selection</title>
+    <link rel="stylesheet" href="{% static '/css/lobby.css' %}">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="sidebar">
+            <a href="/"><button class="button">Home</button></a>
+            <a href="/friends/add_friend"><button class="button" style="width: 100% ;">Add Friends</button></a>
+            <br>
+            <br>
+           
+            
+            <div class="character-heading" style="background-color: rgb(36, 36, 36);" >Friends</div>
+            <br>
+            
+            {% for key,value in friend_list.items %}
+           <a href="chatRooms/{{value}}"> <button class='button'>{{ key }}</button></a>
+           {% endfor %}
+        </div>
+       
+        <div class="details">
+            <div class="character-image">
+                <!-- Replace with an actual image if available -->
+                <img src="{% static '/img/avatar.jpg' %}" alt="Merlin Whitebeard">
+            </div>
+            <div class="character-role">{{user.username}}'s Lobby</div>
+            <br>
+            <div class="character-role"> Wizard </div>
+            <br>
+            <a href="logout"><button class="button" >Logout</button></a>
+            
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+

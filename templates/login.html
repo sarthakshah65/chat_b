@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <title>Document</title>
+</head>
+    <body>
+        <!-- Sign-up form start -->
+        <div class="card" action="user">
+
+            <h1>Log In </h1>
+            {% for messages in messages %}
+            <h5 id="error">{{messages}}</h5>
+            {% endfor %}
+            <form method="post">
+              {% csrf_token %}
+              <label for="username"  class ='label' > <h>Username<span id="45" style="color: red"></span></label>
+              <input type="text"  name="username" placeholder="  Enter Username" />
+              <br>
+              <label for="password"  class ='label' > <h>Password<span id="45" style="color: red"></span></label>
+                <input type="password" name="password" class="password" placeholder="Password" />
+                <br>
+              <button id="button"type="submit" >Login</button>
+            </form>
+            <h6>Not a Member? <a href="signup">Sign up</a></h6>
+            <h5 id="error"></h5>
+          </div>
+          
+      
+       
+
+
+</body>
+</html>

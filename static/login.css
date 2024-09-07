@@ -1,0 +1,72 @@
+@font-face {
+    font-family: MyFont;
+    src: url(./assets/fonts/Roboto-Regular.ttf);
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: MyFont;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    background-color:rgb(0, 0, 0);
+  }
+  .card {
+    width: 400px;
+    background-color:white;
+    padding: 30px;
+    border-radius: 20px;
+    
+  }
+ 
+
+  #error{
+    color: red;
+  }
+  
+
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    display: inline-flex;
+  }
+  label {
+    margin-bottom: 10px;
+    color: rgb(36, 134, 204);
+    text-align: justify;
+    font-size: 15px;
+  }
+  input,select {
+    padding: 10px 20px;
+    font-family: inherit;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid hsl(231, 7%, 60%);
+  }
+  button {
+    font-family: inherit;
+    margin-top: 20px;
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 5px;
+    align-content: center;
+    cursor: pointer;
+    background-color: rgb(36, 134, 204);
+  }
+  button:hover {
+    background-color: hsl(4, 100%, 67%);
+    transition: all 1s;
+  }
+  h1 {
+    font-size: 50px;
+    color: black;
+    text-align: center;
+  }
+  

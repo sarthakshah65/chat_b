@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static '/css/index.css'%}">
+  <script src="{% static '/js/chat.jsx' %}"></script>
+  <title>Chat Room</title>
+</head>
+<body>
+<section class="msger">
+    <ul>
+      <li><a>{{ user.username }}</a></li>
+      <li><a class="active" href="/">Home</a></li>
+    </ul>
+
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> Chat Busters
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+    <br>
+    <main class="msger-chat" id="chat-container">
+      {% for messages in chat_messages reversed %}
+      {% if messages.author == user %}
+      <div class="msg right-msg">
+        <div class="msg-img"> <img src="{% static '/img/avatar.jpg' %}"></div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">{{ user.username }}</div>
+            <div class="msg-info-time">{{ messages.created }}</div>
+          </div>
+          <div class="msg-text">
+            {{ messages.body }}
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="msg left-msg">
+        <div class="msg-img"><img src="{% static '/img/avatar.jpg' %}"></div>
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">{{ messages.author }}</div>
+            <div class="msg-info-time">{{ messages.created }}</div>
+          </div>
+          <div class="msg-text">
+            {{ messages.body }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <!-- Call scrollToBottom here to scroll on initial load -->
+      <script>
+        scrollToBottom();
+      </script>
+    </main>
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" id="body" placeholder="Enter your message...">
+      <button class="msger-send-btn" id="send_button">Send</button>
+    </form>
+<script>
+      const roomName = "{{ room_id }}";
+
+      const chatSocket = new WebSocket(
+        'ws://'
+        + '127.0.0.1:8000'
+        + '/ws/chat/'
+        + roomName
+        + '/'
+      );
+
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const message = data.chat_messages.message; // Assuming 'message' is the key for the actual message text
+        const author = data.chat_messages.author;
+        const date = new Date();
+
+        const options = {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true, 
+        };
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+
+        const formattedDate = formatter.format(date);
+        const finalFormattedDate = formattedDate.replace(',', ',').replace('AM', 'a.m.').replace('PM', 'p.m.');
+
+        if (author == "{{ user.username }}") {
+          console.log("hello");
+          const msgDiv = document.createElement('div');
+          msgDiv.classList.add('msg', 'right-msg');
+          msgDiv.innerHTML = `
+            <div class="msg-img"><img src="{% static '/img/avatar.jpg' %}"></div>
+            <div class="msg-bubble">
+                <div class="msg-info">
+                    <div class="msg-info-name">${author}</div>
+                    <div class="msg-info-time">${finalFormattedDate}</div>
+                </div>
+                <div class="msg-text">
+                    ${message}
+                </div>
+            </div>
+          `;
+
+          document.querySelector('.msger-chat').appendChild(msgDiv);
+          scrollToBottom(); // Scroll to the bottom when a new message is added
+        } else {
+          const msgDiv = document.createElement('div');
+          msgDiv.classList.add('msg', 'left-msg');
+          msgDiv.innerHTML = `
+            <div class="msg-img"><img src="{% static '/img/avatar.jpg' %}"></div>
+            <div class="msg-bubble">
+                <div class="msg-info">
+                    <div class="msg-info-name">${author}</div>
+                    <div class="msg-info-time">${finalFormattedDate}</div>
+                </div>
+                <div class="msg-text">
+                    ${message}
+                </div>
+            </div>
+          `;
+
+          document.querySelector('.msger-chat').appendChild(msgDiv);
+          scrollToBottom(); // Scroll to the bottom when a new message is added
+        }
+      };
+
+      document.getElementById("send_button").onclick = function (e) {
+        e.preventDefault();
+        const messageInputDom = document.getElementById('body');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+          'message': message,
+          'author': "{{ user.username }}",
+          'room_id': "{{ room_id }}"
+        }));
+        messageInputDom.value = '';
+        scrollToBottom(); // Ensure scrolls down after sending
+      };
+
+      function scrollToBottom() {
+        var chatContainer = document.getElementById("chat-container");
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+</script>
+</section>
+</body>
+</html>
