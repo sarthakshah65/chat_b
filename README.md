@@ -1,4 +1,5 @@
 Chat Busters 
+
 A real-time chat application built using Django channels. This application allows users to communicate with each other in private and group chats, offering a smooth and user-friendly interface.
 
 Features
