@@ -26,6 +26,10 @@ class FriendsList(models.Model):
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     Friends_List=models.TextField(null=True)
 
+class RequestList(models.Model):
+    author=models.ForeignKey(User,on_delete=models.CASCADE)
+    Friend_Request_List=models.TextField(null=True)
+
 
     
 

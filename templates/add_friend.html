@@ -1,18 +1,26 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/add.css' %}">
     <title>Document</title>
 </head>
 <body>
+    <div class="form">
     <form method="post">
         {% csrf_token %}
-        <label for="user">Enter the Username the user you want to add as friend</label><br>
-        <input type="text" name="user">{{ message }}
-
-
+        <div class="text1">
+        <label for="user" style="font-weight: bold; font-size: medium;">Enter the Username the user you want to add as friend</label><br><br>
+        <input type="text" class="box" name="user">{{ message }}
+        </div>
+        
+    <div class="btn-out">
+        <input type="submit"  class="btn" name="submit" value="Add friend" >
+    </div>
     </form>
+</div>
     
 </body>
 </html>

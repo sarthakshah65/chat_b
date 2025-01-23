@@ -88,3 +88,27 @@ body {
     background-color: white;
     color: black;
 }
+
+.abcd{
+    background-color:rgb(71, 66, 66);
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+    border-radius: 50px;
+}
+.abcd:hover{
+    background-color: white;
+    color: black;
+}
+
+.request{
+    display: flex;
+    
+}
