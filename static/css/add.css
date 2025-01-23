@@ -1,0 +1,40 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+.btn{
+    background-color:wheat;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width: 100%;
+}
+
+.box{
+    padding: 5px;
+    border-color:black;
+    border-radius: 20px;
+
+}
+
+.text1{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+   
+}
+
+.btn-out{
+    padding: 10px;
+}

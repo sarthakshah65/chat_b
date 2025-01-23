@@ -11,8 +11,9 @@
     <div class="container">
         
         <div class="sidebar">
+            <br>
             <a href="/"><button class="button">Home</button></a>
-            <a href="/friends/add_friend"><button class="button" style="width: 100% ;">Add Friends</button></a>
+            <a href="/friends/send_request"><button class="button" style="width: 100% ;">Add Friends</button></a>
             <br>
             <br>
            
@@ -20,9 +21,20 @@
             <div class="character-heading" style="background-color: rgb(36, 36, 36);" >Friends</div>
             <br>
             
+            
             {% for key,value in friend_list.items %}
            <a href="chatRooms/{{value}}"> <button class='button'>{{ key }}</button></a>
            {% endfor %}
+           <br>
+           <div class="character-heading" style="background-color: rgb(36, 36, 36);" >Friend Requests</div>
+           <br>
+           {% for key,value in request_list.items %}
+           <div class="request">
+          <button class="abcd">{{ key }} </button>
+          <a href="friends/add_friend/{{ key }}"> <button class="abcd">Accepte </button> </a> 
+          <a href="friends/reject_request/{{ key }}"> <button class="abcd">Reject </button> </a> 
+        </div>
+          {% endfor %}
         </div>
        
         <div class="details">
